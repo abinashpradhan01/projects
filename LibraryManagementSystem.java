@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LibraryManagementSystem {
 
     void run() {
         Scanner s = new Scanner(System.in);
-        String[] booklist = new String[50];
+        ArrayList<String> booklist = new ArrayList<>();
 
         while (true) {
             System.out.println(
@@ -23,7 +24,7 @@ public class LibraryManagementSystem {
                     issueBooks(s, booklist);
                     break;
                 case 3:
-                    displayBookList(s, booklist);
+                    displayBookList(booklist);
                     break;
                 case 4:
                     returnBooks(s, booklist);
@@ -41,115 +42,72 @@ public class LibraryManagementSystem {
         }
     }
 
-    void searchBook(Scanner s, String[] booklist) {
+    void searchBook(Scanner s, ArrayList<String> booklist) {
         System.out.println("Enter the name of the book you want to search in the book list: ");
         String name = s.nextLine();
-        int avl = 0;
+        boolean found = false;
 
-        for (int k = 0; k < booklist.length; ++k) {
-            if (booklist[k] != null && booklist[k].equalsIgnoreCase(name)) {
-                avl = 1;
+        for (String book : booklist) {
+            if (book.equalsIgnoreCase(name)) {
+                found = true;
                 break;
             }
         }
 
-        if (avl == 1) {
+        if (found) {
             System.out.println(name.toUpperCase() + " does exist in the book list");
         } else {
             System.out.println(name + " does not exist in the book list.");
         }
     }
 
-    void issueBooks(Scanner s, String[] booklist) {
+    void issueBooks(Scanner s, ArrayList<String> booklist) {
         System.out.println("Enter the name of the book you want to issue: ");
         String name = s.nextLine();
         String NAME = name.toUpperCase();
-        int avl = 0;
 
-        for (String element : booklist) {
-            if (element != null && element.equalsIgnoreCase(NAME)) {
-                avl = 1;
-                break;
-            }
-        }
-
-        if (avl == 1) {
-            for (int k = 0; k < booklist.length; ++k) {
-                if (NAME.equalsIgnoreCase(booklist[k])) {
-                    booklist[k] = null;
-                    System.out.println(NAME + " book has been issued.");
-                    break;
-                }
-            }
+        if (booklist.removeIf(book -> book.equalsIgnoreCase(NAME))) {
+            System.out.println(NAME + " book has been issued.");
         } else {
             System.out.println("The requested book is not available, sorry.");
         }
     }
 
-    void returnBooks(Scanner s, String[] booklist) {
+    void returnBooks(Scanner s, ArrayList<String> booklist) {
         System.out.println("Enter the name of the book you want to return: ");
         String name = s.nextLine();
         String NAME = name.toUpperCase();
-        int avl = 0;
 
-        for (String element : booklist) {
-            if (element != null && element.equalsIgnoreCase(NAME)) {
-                avl = 1;
-                break;
-            }
-        }
-
-        if (avl == 0) {
-            for (int k = 0; k < booklist.length; ++k) {
-                if (booklist[k] == null) {
-                    booklist[k] = NAME;
-                    System.out.println(NAME + " book has been returned.");
-                    break;
-                }
-            }
+        if (!booklist.contains(NAME)) {
+            booklist.add(NAME);
+            System.out.println(NAME + " book has been returned.");
         } else {
             System.out.println("Book already in the library.");
         }
     }
 
-    void addBooks(Scanner s, String[] booklist) {
+    void addBooks(Scanner s, ArrayList<String> booklist) {
         System.out.println("Enter the name of the book you want to add: ");
         String name = s.nextLine();
         String NAME = name.toUpperCase();
-        int avl = 0;
 
-        for (String element : booklist) {
-            if (element != null && element.equalsIgnoreCase(NAME)) {
-                avl = 1;
-                break;
-            }
-        }
-
-        if (avl == 0) {
-            for (int k = 0; k < booklist.length; ++k) {
-                if (booklist[k] == null) {
-                    booklist[k] = NAME;
-                    System.out.println(NAME + " book has been added.");
-                    break;
-                }
-            }
+        if (!booklist.contains(NAME)) {
+            booklist.add(NAME);
+            System.out.println(NAME + " book has been added.");
         } else {
             System.out.println("Book already exists in the library.");
         }
     }
 
-    void displayBookList(Scanner s, String[] booklist) {
+    void displayBookList(ArrayList<String> booklist) {
         System.out.println("Available books in the library:");
-
-        for (int k = 0; k < booklist.length; ++k) {
-            int i = k + 1;
-            if (booklist[k] != null) {
-                System.out.println(i + " " + booklist[k]);
-            }
-        }
-
-        if (booklist[0] == null) {
+        
+        if (booklist.isEmpty()) {
             System.out.printf("Book list is empty.\n\n\n");
+        } else {
+            for (int i = 0; i < booklist.size(); i++) {
+                System.out.println((i + 1) + " " + booklist.get(i));
+            }
         }
     }
 
