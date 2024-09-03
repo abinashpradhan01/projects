@@ -27,8 +27,9 @@ public class Stone_Paper_Scissor_Game {
             } else if (choice.equalsIgnoreCase("scissor")) {
                 you = -1;
             } else {
-                System.out.println("Invalid input.");
-                System.exit(0);
+                System.out.println("Invalid input. Please choose Stone, Paper, or Scissor.");
+                i--; // Repeat this round
+                continue;
             }
 
             Random rand = new Random();
@@ -45,14 +46,14 @@ public class Stone_Paper_Scissor_Game {
             System.out.println("You chose: " + choice.toUpperCase());
             System.out.println("Computer chose: " + compChoice.toUpperCase());
 
-            if (computer == 1 && you == 1 || computer == -1 && you == -1 || computer == 0 && you == 0) {
+            if (you == computer) {
                 System.out.println("It's a draw.");
-            } else if (computer == 1 && you == -1 || computer == -1 && you == 0 || computer == 0 && you == 1) {
-                System.out.println("You lose, try again...");
-                cpoints = cpoints + 2;
-            } else {
+            } else if ((you == 1 && computer == -1) || (you == 0 && computer == 1) || (you == -1 && computer == 0)) {
                 System.out.println("You WIN, Congratulations.");
-                ypoints = ypoints + 2;
+                ypoints += 2;
+            } else {
+                System.out.println("You lose, try again...");
+                cpoints += 2;
             }
         }
 
