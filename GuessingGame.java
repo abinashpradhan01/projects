@@ -10,7 +10,7 @@ class Game {
         System.out.print("Give your guess (should be between 1 and 100): ");
         choice = s.nextInt();
 
-        if (!(choice > 0 && choice < 100)) {
+        if (!(choice >= 1 && choice <= 100)) {
             System.out.println("Invalid input. Exiting...");
             System.exit(0);
         } else {
@@ -37,7 +37,7 @@ public class Guessing_Game {
 
         if (g.result) {
             System.out.println();
-            System.out.printf("You guessed it right and number of guesses is: %d\n", g.nguess);
+            System.out.printf("You guessed it right and the number of guesses is: %d\n", g.nguess);
             System.out.printf("You chose: %d\nComputer chose: %d\n", g.choice, g.comp);
         }
     }
