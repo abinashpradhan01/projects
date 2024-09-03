@@ -1,143 +1,127 @@
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class MyToDoList {
+    ArrayList<String> listOfTask = new ArrayList<>();
+    ArrayList<String> res = new ArrayList<>();
+
     void run() {
-        try {
-            String[] listOfTask = new String[50];
-            final String[] res = new String[50];
-            Scanner sh = new Scanner(System.in);
-            while (true) {
-                System.out.print("Choose an option from the options mentioned below :");
-                System.out.printf("\n\t\t1-for adding a new task");
-                System.out.printf("\n\t\t2-for removing a task");
-                System.out.printf("\n\t\t3-for displaying the list of tasks");
-                System.out.printf("\n\t\t4-for marking a task DONE");
-                System.out.printf("\n\t\t5-for marking a task UNDONE");
-                System.out.printf("\n\t\t6-to RESET the task list");
-                System.out.printf("\n\t\t7-to EXIT");
-                System.out.print("\nEnter the number representing your choice : ");
-                int choice = sh.nextInt();
-                sh.nextLine();
-                try {
-                    switch (choice) {
-                        case 1:
-                            addTask(sh, listOfTask);
-                            break;
-                        case 2:
-                            removeTask(sh, listOfTask, res);
-                            break;
-                        case 3:
-                            displayTaskList(listOfTask, res);
-                            break;
-                        case 4:
-                            marktaskDone(sh, listOfTask, res);
-                            break;
-                        case 5:
-                            markTaskUndone(sh, listOfTask, res);
-                            break;
-                        case 6:
-                            clearTasklist(sh, listOfTask, res);
-                            break;
-                        case 7:
-                            System.out.println("Thank you for visiting. ");
-                            System.exit(0);
-                            break;
-                        default:
-                            System.out.println("Invalid Input");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Choose an integer please:");
-                    break;
-                }
+        Scanner sh = new Scanner(System.in);
+        while (true) {
+            System.out.println("Choose an option from the options mentioned below :");
+            System.out.println("\t\t1 - for adding a new task");
+            System.out.println("\t\t2 - for removing a task");
+            System.out.println("\t\t3 - for displaying the list of tasks");
+            System.out.println("\t\t4 - for marking a task DONE");
+            System.out.println("\t\t5 - for marking a task UNDONE");
+            System.out.println("\t\t6 - to RESET the task list");
+            System.out.println("\t\t7 - to EXIT");
+            System.out.print("Enter the number representing your choice : ");
+
+            int choice = -1;
+            try {
+                choice = sh.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Choose a valid integer please:");
+                sh.next();
+                continue;
             }
-            sh.close();
-        } catch (Exception e) {
-            run();
+
+            sh.nextLine();
+
+            switch (choice) {
+                case 1:
+                    addTask(sh);
+                    break;
+                case 2:
+                    removeTask(sh);
+                    break;
+                case 3:
+                    displayTaskList();
+                    break;
+                case 4:
+                    markTaskDone(sh);
+                    break;
+                case 5:
+                    markTaskUndone(sh);
+                    break;
+                case 6:
+                    clearTaskList();
+                    break;
+                case 7:
+                    System.out.println("Thank you for visiting.");
+                    sh.close();
+                    return;
+                default:
+                    System.out.println("Invalid Input");
+            }
         }
     }
 
-    void clearTasklist(Scanner sh, String[] listOfTask, String[] res) {
-        for (int i = 0; i < listOfTask.length; ++i) {
-            listOfTask[i] = res[i] = null;
-        }
-        System.out.println("To do list is empty now.");
+    void clearTaskList() {
+        listOfTask.clear();
+        res.clear();
+        System.out.println("To-do list is empty now.");
     }
 
-    void addTask(Scanner sh, String[] listOfTask) {
-        String task;
+    void addTask(Scanner sh) {
         System.out.print("Enter the task you want to add: ");
-        task = sh.nextLine();
-        try {
-            for (int i = 0; i < listOfTask.length; ++i) {
-                if (listOfTask[i] == null) {
-                    listOfTask[i] = task.toUpperCase();
-                    System.out.println(task.toUpperCase() + " has been added successfully.");
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("An error occurred. Please try again.");
-            addTask(sh, listOfTask);
-        }
+        String task = sh.nextLine().toUpperCase();
+        listOfTask.add(task);
+        res.add("UNDONE");
+        System.out.println(task + " has been added successfully.");
     }
 
-    void removeTask(Scanner sh, String[] listOfTask, String[] res) {
-        displayTaskList(listOfTask, res);
+    void removeTask(Scanner sh) {
+        displayTaskList();
         System.out.print("Enter the index of the task you want to remove from list: ");
         int i = sh.nextInt();
         sh.nextLine();
-        int ind = i - 1;
-        if (ind >= 0 && ind < listOfTask.length && listOfTask[ind] != null) {
-            listOfTask[ind] = null;
-            res[ind] = null;
-            System.out.println("Task on " + i + " index has been removed.");
+
+        if (i > 0 && i <= listOfTask.size()) {
+            listOfTask.remove(i - 1);
+            res.remove(i - 1);
+            System.out.println("Task on index " + i + " has been removed.");
         } else {
             System.out.println("Invalid index.");
         }
     }
 
-    void displayTaskList(String[] listOfTask, String[] res) {
-        System.out.println("*****List of tasks*****");
-        int avl = 0;
-        for (int k = 0; k < listOfTask.length; ++k) {
-            int i = k + 1;
-            if (listOfTask[k] != null) {
-                avl = 1;
-                System.out.print(i + ". " + listOfTask[k] + " - ");
-                if ("DONE".equals(res[k])) {
-                    System.out.print(res[k]);
-                } else {
-                    System.out.print("UNDONE");
-                }
-                System.out.println();
-            }
+    void displayTaskList() {
+        System.out.println("***** List of tasks *****");
+        if (listOfTask.isEmpty()) {
+            System.out.println("Task list is currently empty.");
+            return;
         }
-        if (avl == 0) {
-            System.out.println("Task list is currently empty now.");
+
+        for (int i = 0; i < listOfTask.size(); i++) {
+            System.out.println((i + 1) + ". " + listOfTask.get(i) + " - " + res.get(i));
         }
     }
 
-    void marktaskDone(Scanner sh, String[] listOfTask, String[] res) {
-        displayTaskList(listOfTask, res);
+    void markTaskDone(Scanner sh) {
+        displayTaskList();
         System.out.print("Enter the index no of the task you want to mark as done: ");
         int i = sh.nextInt();
         sh.nextLine();
-        int ind = i - 1;
-        if (ind >= 0 && ind < listOfTask.length && listOfTask[ind] != null) {
+
+        if (i > 0 && i <= listOfTask.size()) {
+            res.set(i - 1, "DONE");
             System.out.println("Task on index no. " + i + " has been marked DONE.");
         } else {
             System.out.println("Invalid index.");
         }
     }
 
-    void markTaskUndone(Scanner sh, String[] listOfTask, String[] res) {
-        displayTaskList(listOfTask, res);
+    void markTaskUndone(Scanner sh) {
+        displayTaskList();
         System.out.print("Enter the index no of the task you want to mark as undone: ");
         int i = sh.nextInt();
         sh.nextLine();
-        int ind = i - 1;
-        if (ind >= 0 && ind < listOfTask.length && listOfTask[ind] != null) {
-            res[ind] = "UNDONE";
+
+        if (i > 0 && i <= listOfTask.size()) {
+            res.set(i - 1, "UNDONE");
             System.out.println("Task on index no. " + i + " has been marked UNDONE.");
         } else {
             System.out.println("Invalid index.");
