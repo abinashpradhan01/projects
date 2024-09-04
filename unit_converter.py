@@ -1,4 +1,4 @@
-from forex_python.converter import CurrencyCodes, CurrencyRates
+from forex_python.converter import CurrencyCodes, CurrencyRates, RatesNotAvailableError
 
 def run():
     try:
@@ -55,7 +55,7 @@ def weight():
 1- To convert kgs to pounds
 2- To convert pounds to kgs
 3- Return to main menu
-4- Exit"""
+4- Exit - """
             )
         )
 
@@ -94,7 +94,7 @@ def numeralSystem():
 1- To convert deca to deci
 2- To convert hecto to deci
 3- Return to main menu
-4- Exit"""
+4- Exit - """
             )
         )
 
@@ -133,7 +133,7 @@ def mass():
 1- To convert kgs to tonnes
 2- To convert grams to milligrams
 3- Return to main menu
-4- Exit"""
+4- Exit - """
             )
         )
 
@@ -172,7 +172,7 @@ def speed():
 1- To convert kmph to mph
 2- To convert mph to kmph
 3- Return to main menu
-4- Exit"""
+4- Exit - """
             )
         )
 
@@ -211,7 +211,7 @@ def data():
 1- To convert MBs to KBs
 2- To convert TBs to GBs
 3- Return to main menu
-4- Exit"""
+4- Exit - """
             )
         )
 
@@ -250,7 +250,7 @@ def length():
 1- To convert feet to metres
 2- To convert metres to inches
 3- Return to main menu
-4- Exit"""
+4- Exit - """
             )
         )
 
@@ -291,7 +291,7 @@ def temperature():
 3- To convert celsius to kelvin
 4- To convert kelvin to celsius
 5- Return to the main menu
-6- Exit"""
+6- Exit - """
             )
         )
 
@@ -344,7 +344,7 @@ def currencyConversion():
 3- USD to INR
 4- INR to USD
 5- Return to main menu
-6- Exit"""
+6- Exit - """
             )
         )
 
@@ -372,11 +372,14 @@ def currencyConversion():
         currencyConversion()
 
 def currencyConversionRate(from_curr, to_curr):
-    c = CurrencyRates()
-    conversion = c.get_rate(from_curr, to_curr)
-    currency_codes = CurrencyCodes()
-    currency_symbol = currency_codes.get_symbol(to_curr)
-    return f"1 {from_curr} is equal to {conversion:.2f} {currency_symbol}"
-
+    try:
+        c = CurrencyRates()
+        conversion = c.get_rate(from_curr, to_curr)
+        currency_codes = CurrencyCodes()
+        currency_symbol = currency_codes.get_symbol(to_curr)
+        return f"1 {from_curr} is equal to {conversion:.2f} {currency_symbol}"
+    except RatesNotAvailableError:
+        return "Exchange rate not available for the requested currencies. "
+    except Exception as e:
+        return f"An error occured : {e}"
 run()
-    
