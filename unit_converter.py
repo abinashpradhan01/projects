@@ -379,3 +379,4 @@ def currencyConversionRate(from_curr, to_curr):
     return f"1 {from_curr} is equal to {conversion:.2f} {currency_symbol}"
 
 run()
+    
