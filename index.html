@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <style>
+        /* CSS Variables for Theme Colors */
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --card-bg: #fff;
+            --card-border: #e2e8f0;
+            --header-color: #2d3748;
+            --primary-color: #4299e1;
+            --primary-hover: #3182ce;
+            --tab-active-bg: #ebf8ff;
+            --tab-text: #4a5568;
+            --card-shadow: rgba(0, 0, 0, 0.08);
+            --card-hover-shadow: rgba(0, 0, 0, 0.12);
+            --bg-pattern: radial-gradient(circle, transparent 20%, var(--bg-color) 20%, var(--bg-color) 80%, transparent 80%, transparent), 
+                           radial-gradient(circle, transparent 20%, var(--bg-color) 20%, var(--bg-color) 80%, transparent 80%, transparent) 25px 25px, 
+                           linear-gradient(var(--primary-color) 2px, transparent 2px) 0 -1px, 
+                           linear-gradient(90deg, var(--primary-color) 2px, var(--bg-color) 2px) -1px 0;
+            --bg-pattern-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+            --bg-pattern-alpha: 0.03;
+        }
+
+        /* Dark Theme Variables */
+        [data-theme="dark"] {
+            --bg-color: #1a202c;
+            --text-color: #e2e8f0;
+            --card-bg: #2d3748;
+            --card-border: #4a5568;
+            --header-color: #e2e8f0;
+            --primary-color: #63b3ed;
+            --primary-hover: #4299e1;
+            --tab-active-bg: #2c5282;
+            --tab-text: #cbd5e0;
+            --card-shadow: rgba(0, 0, 0, 0.25);
+            --card-hover-shadow: rgba(0, 0, 0, 0.35);
+            --bg-pattern-alpha: 0.05;
+        }
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+            background-image: var(--bg-pattern);
+            background-size: var(--bg-pattern-size);
+            background-color: var(--bg-color);
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            padding: 10px;
+            background-color: var(--card-bg);
+            border-radius: 50%;
+            box-shadow: 0 2px 10px var(--card-shadow);
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-toggle svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Header Styles */
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            color: var(--header-color);
+            text-align: center;
+            font-weight: 700;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        /* Tabs Styles */
+        .tabs-container {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px var(--card-shadow);
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .tab-button {
+            background: transparent;
+            border: none;
+            color: var(--tab-text);
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-button:hover {
+            background-color: rgba(247, 250, 252, 0.1);
+            color: var(--primary-color);
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+            background-color: var(--tab-active-bg);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        /* Tab Content Styles */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Project Card Styles */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+            opacity: 0.7;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--card-hover-shadow);
+        }
+
+        .project-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.05;
+            background-image: radial-gradient(var(--primary-color) 2px, transparent 2px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--header-color);
+            font-weight: 700;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .project-description {
+            margin-bottom: 20px;
+            color: var(--tab-text);
+            font-size: 0.95rem;
+            height: 80px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .project-links a {
+            display: inline-block;
+            padding: 10px 16px;
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-align: center;
+            flex: 1;
+        }
+
+        .project-links a:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .project-links a:last-child {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .project-links a:last-child:hover {
+            background-color: rgba(235, 248, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .tabs {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .tab-button {
+                width: 100%;
+                text-align: left;
+                border-left: 3px solid transparent;
+                border-bottom: none;
+                padding: 12px 15px;
+            }
+
+            .tab-button.active {
+                border-left: 3px solid var(--primary-color);
+                border-bottom: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-description {
+                height: auto;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Dark Mode Toggle Button -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <!-- Sun icon for light mode -->
+        <svg class="light-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-15a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V5a1 1 0 0 1 1-1zm0 15a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0v-1a1 1 0 0 1 1-1zM5 12a1 1 0 0 1-1-1 1 1 0 0 1 1-1h1a1 1 0 0 1 0 2H5zm15 0a1 1 0 0 1-1-1 1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1zM6.364 6.364a1 1 0 0 1 0-1.414 1 1 0 0 1 1.414 0l.707.707a1 1 0 0 1-1.414 1.414l-.707-.707zm10.151 10.151a1 1 0 0 1 0-1.414 1 1 0 0 1 1.414 0l.707.707a1 1 0 0 1-1.414 1.414l-.707-.707zm-10.151.707a1 1 0 0 1-1.414-1.414l.707-.707a1 1 0 0 1 1.414 1.414l-.707.707zm10.151-10.151a1 1 0 0 1-1.414-1.414l.707-.707a1 1 0 0 1 1.414 1.414l-.707.707z" />
+        </svg>
+        <!-- Moon icon for dark mode -->
+        <svg class="dark-icon" style="display:none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 22c5.523 0 10-4.477 10-10 0-.463-.694-.54-.933-.163a6.5 6.5 0 1 1-8.904-8.904C12.54 2.693 12.463 2 12 2 6.477 2 2 6.477 2 12s4.477 10 10 10z" />
+        </svg>
+    </div>
+
+    <div class="header-container">
+        <h1>Projects</h1>
+    </div>
+
+    <div class="tabs-container">
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'applied-os')">Applied OS Projects</button>
+            <button class="tab-button" onclick="openTab(event, 'ml')">ML Projects</button>
+            <button class="tab-button" onclick="openTab(event, 'dl')">DL Projects</button>
+            <button class="tab-button" onclick="openTab(event, 'gan')">GAN Projects</button>
+            <button class="tab-button" onclick="openTab(event, 'nlp')">NLP Projects</button>
+        </div>
+    </div>
+
+    <div id="applied-os" class="tab-content active">
+        <div class="projects-grid">
+            <div class="project-card">
+                <h2 class="project-title">Custom Shell Implementation</h2>
+                <p class="project-description">A custom Unix-like shell with support for piping, redirection, and
+                    background processes. Built with C and system calls to demonstrate fundamental OS concepts.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Virtual Memory Manager</h2>
+                <p class="project-description">Implementation of a virtual memory management system that demonstrates
+                    page replacement algorithms like LRU, FIFO, and Clock Algorithm with visualization of page faults.
+                </p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <h2 class="project-title">Virtual Memory Manager</h2>
+                <p class="project-description">Implementation of a virtual memory management system that demonstrates
+                    page replacement algorithms like LRU, FIFO, and Clock Algorithm with visualization of page faults.
+                </p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <h2 class="project-title">Virtual Memory Manager</h2>
+                <p class="project-description">Implementation of a virtual memory management system that demonstrates
+                    page replacement algorithms like LRU, FIFO, and Clock Algorithm with visualization of page faults.
+                </p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <h2 class="project-title">Distributed File System</h2>
+                <p class="project-description">A simplified distributed file system inspired by Google File System (GFS)
+                    that provides fault tolerance and high availability through replication.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ml" class="tab-content">
+        <div class="projects-grid">
+            <div class="project-card">
+                <h2 class="project-title">CO₂ Emission Prediction for Vehicles</h2>
+                <p class="project-description">Predict CO₂ emissions based on fuel consumption and engine size using
+                    Linear Regression techniques.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Diabetes Risk Prediction for Patients</h2>
+                <p class="project-description">Predict a person's likelihood of developing diabetes using health
+                    parameters through Logistic Regression analysis.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">House Price Estimator for Real Estate Agencies</h2>
+                <p class="project-description">Estimate house prices based on location, size, and amenities using Linear
+                    Regression models.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Customer Churn Prediction for Telecom Companies</h2>
+                <p class="project-description">Predict whether a telecom customer will leave based on service usage and
+                    billing history using Logistic Regression.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Fraud Detection in Online Transactions</h2>
+                <p class="project-description">Identify fraudulent transactions using Neural Network (Binary
+                    Classification) and Anomaly Detection techniques.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Loan Default Prediction for Banks</h2>
+                <p class="project-description">Predict if a borrower will default on a loan using financial history with
+                    Decision Trees, Random Forest, and XGBoost.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Handwritten Digit Recognition for Automated Forms Processing</h2>
+                <p class="project-description">Recognize handwritten digits in forms using Neural Network (Multi-class
+                    Classification) deep learning.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Employee Attrition Prediction for HR Analytics</h2>
+                <p class="project-description">Predict employee attrition for workforce planning using Decision Trees,
+                    Random Forest, and XGBoost algorithms.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Medical Image Classification (Pneumonia Detection)</h2>
+                <p class="project-description">Classify chest X-rays to detect pneumonia using CNNs and transfer
+                    learning techniques.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Fake News Detection System</h2>
+                <p class="project-description">Classify news articles as real or fake using Decision Trees, Random
+                    Forest, and XGBoost classifiers.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Traffic Sign Recognition for Autonomous Cars</h2>
+                <p class="project-description">Classify road signs using CNNs and Softmax Activation for self-driving
+                    car systems.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Customer Sentiment Analysis for E-Commerce Reviews</h2>
+                <p class="project-description">Predict customer sentiment from product reviews using NLP, Decision
+                    Trees, and XGBoost techniques.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Customer Segmentation for E-Commerce Marketing</h2>
+                <p class="project-description">Segment customers based on purchasing behavior for targeted marketing
+                    using K-Means Clustering.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Network Intrusion Detection for Cybersecurity</h2>
+                <p class="project-description">Detect anomalies in network traffic to identify cybersecurity threats
+                    using Anomaly Detection, Autoencoders, and Isolation Forest.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Product Recommendation System for E-Commerce</h2>
+                <p class="project-description">Recommend products based on purchase history and behavior with K-Means
+                    Clustering and Collaborative Filtering.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Defective Product Detection in Manufacturing</h2>
+                <p class="project-description">Detect defective products in an assembly line using Anomaly Detection,
+                    Isolation Forest, and CNNs.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">AI-Generated Personalized Workout Plans</h2>
+                <p class="project-description">Recommend personalized workout plans based on users' past activities
+                    using Collaborative Filtering, Implicit Feedback, and Matrix Factorization.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Sustainable Shopping Guide</h2>
+                <p class="project-description">Help users make sustainable shopping choices using personalized
+                    recommendations through Hybrid Recommender (Collaborative + Content-Based) systems.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2 class="project-title">Detecting Fashion Trends from Social Media</h2>
+                <p class="project-description">Detect and predict emerging fashion trends using social media image
+                    analysis with PCA, K-Means Clustering, and Image Feature Extraction.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Repository</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dl" class="tab-content">
+        <div class="projects-grid">
+            <div class="project-card">
+                <h2 class="project-title">🚀 Projects Under Construction! 🏗️</h2>
+                <p class="project-description">
+                    I'm currently building some amazing deep learning projects! They'll be displayed here soon. Stay tuned for the updates! 😊
+                </p>
+            </div>
+        </div>        
+    </div>
+
+    <div id="gan" class="tab-content">
+        <div class="projects-grid">
+            <div class="project-card">
+                <h2 class="project-title">🎨 GAN Projects Coming Soon! 🏗️</h2>
+                <p class="project-description">
+                    Exciting Generative Adversarial Network (GAN) projects are in the works! Stay tuned for AI-generated art, faces, and more. 🚀
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="nlp" class="tab-content">
+        <div class="projects-grid">
+            <div class="project-card">
+                <h2 class="project-title">📝 NLP Projects Coming Soon! 🚀</h2>
+                <p class="project-description">
+                    The world of Natural Language Processing is fascinating, and I'm currently working on some exciting
+                    projects! Stay tuned😊
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabContent, tabButtons;
+
+            // Hide all tab content
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+            }
+
+            // Remove "active" class from all tab buttons
+            tabButtons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+
+            // Show the current tab and add "active" class to the button
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Dark mode toggle function
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            
+            // Toggle icon visibility
+            const lightIcon = document.querySelector('.light-icon');
+            const darkIcon = document.querySelector('.dark-icon');
+            
+            if (newTheme === 'dark') {
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'block';
+            } else {
+                lightIcon.style.display = 'block';
+                darkIcon.style.display = 'none';
+            }
+            
+            // Store preference in localStorage
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Check for saved theme preference
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                
+                // Set correct icon
+                const lightIcon = document.querySelector('.light-icon');
+                const darkIcon = document.querySelector('.dark-icon');
+                
+                if (savedTheme === 'dark') {
+                    lightIcon.style.display = 'none';
+                    darkIcon.style.display = 'block';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
