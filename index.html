@@ -1,176 +1,127 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
+    <title>Abinash Pradhan | Projects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for Theme Colors */
+        /* Global Styles */
         :root {
-            --bg-color: #f8f9fa;
-            --text-color: #333;
-            --card-bg: #fff;
-            --card-border: #e2e8f0;
-            --header-color: #2d3748;
-            --primary-color: #4299e1;
-            --primary-hover: #3182ce;
-            --tab-active-bg: #ebf8ff;
-            --tab-text: #4a5568;
-            --card-shadow: rgba(0, 0, 0, 0.08);
-            --card-hover-shadow: rgba(0, 0, 0, 0.12);
-            --bg-pattern: radial-gradient(circle, transparent 20%, var(--bg-color) 20%, var(--bg-color) 80%, transparent 80%, transparent), 
-                           radial-gradient(circle, transparent 20%, var(--bg-color) 20%, var(--bg-color) 80%, transparent 80%, transparent) 25px 25px, 
-                           linear-gradient(var(--primary-color) 2px, transparent 2px) 0 -1px, 
-                           linear-gradient(90deg, var(--primary-color) 2px, var(--bg-color) 2px) -1px 0;
-            --bg-pattern-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
-            --bg-pattern-alpha: 0.03;
+            --primary-color: #4f46e5;
+            --primary-light: #818cf8;
+            --background-color: #fffaf5;
+            --text-color: #1f2937;
+            --card-color: #ffffff;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --hover-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --accent-color: #4f46e5;
+            --accent-hover: #4338ca;
+            --card-width: 100%;
+            --card-height: auto;
+            --tag-bg: #f3f4f6;
+            --subtitle-color: #6b7280;
+            --border-color: #e5e7eb;
         }
 
-
-
-        
-        /* Dark Theme Variables */
-        [data-theme="dark"] {
-            --bg-color: #1a202c;
-            --text-color: #e2e8f0;
-            --card-bg: #2d3748;
-            --card-border: #4a5568;
-            --header-color: #e2e8f0;
-            --primary-color: #63b3ed;
-            --primary-hover: #4299e1;
-            --tab-active-bg: #2c5282;
-            --tab-text: #cbd5e0;
-            --card-shadow: rgba(0, 0, 0, 0.25);
-            --card-hover-shadow: rgba(0, 0, 0, 0.35);
-            --bg-pattern-alpha: 0.05;
-        }
-
-        /* Basic Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
-            padding: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            transition: all 0.3s ease;
-            background-image: var(--bg-pattern);
-            background-size: var(--bg-pattern-size);
-            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(circle at 0% 0%, #fff5eb 0%, transparent 20%),
+                radial-gradient(circle at 100% 100%, #ffeee0 0%, transparent 20%);
+            min-height: 100vh;
         }
 
-        /* Dark Mode Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            padding: 10px;
-            background-color: var(--card-bg);
-            border-radius: 50%;
-            box-shadow: 0 2px 10px var(--card-shadow);
-            cursor: pointer;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--card-border);
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        .theme-toggle svg {
-            width: 22px;
-            height: 22px;
-            fill: var(--text-color);
-            transition: all 0.3s ease;
-        }
-
-        /* Header Styles */
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 30px;
-            color: var(--header-color);
+        /* Header */
+        header {
+            padding: 4rem 2rem;
             text-align: center;
-            font-weight: 700;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--primary-color);
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 40px;
+            background: linear-gradient(135deg, #4f46e5 0%, #818cf8 100%);
             position: relative;
-        }
-
-        /* Tabs Styles */
-        .tabs-container {
-            margin-bottom: 40px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px var(--card-shadow);
             overflow: hidden;
-            border: 1px solid var(--card-border);
-            transition: all 0.3s ease;
+            border-radius: 0 0 3rem 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .tab-button {
-            background: transparent;
-            border: none;
-            color: var(--tab-text);
-            padding: 14px 24px;
+        header h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+            font-family: 'Playfair Display', serif;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+            font-weight: 500;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .header-buttons {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            animation: fadeIn 1.4s ease-out;
+        }
+
+        .header-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
             font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            border-bottom: 3px solid transparent;
+            transition: var(--transition);
         }
 
-        .tab-button:hover {
-            background-color: rgba(247, 250, 252, 0.1);
-            color: var(--primary-color);
+        .primary-button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
         }
 
-        .tab-button.active {
-            color: var(--primary-color);
-            background-color: var(--tab-active-bg);
-            border-bottom: 3px solid var(--primary-color);
+        .primary-button:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
         }
 
-        /* Tab Content Styles */
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s;
+        .secondary-button {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .secondary-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(20px);
             }
 
             to {
@@ -179,303 +130,634 @@
             }
         }
 
-        .tab-content.active {
-            display: block;
+        /* Projects Container */
+        .projects-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
         }
 
-        /* Project Card Styles */
+        .projects-heading {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .projects-heading h2 {
+            font-size: 2.4rem;
+            color: var(--text-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .projects-intro {
+            color: var(--subtitle-color);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            animation: fadeIn 1.6s ease-out;
         }
 
+        /* Project Card */
         .project-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 12px var(--card-shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid var(--card-border);
-            position: relative;
+            background: var(--card-color);
+            border-radius: 1.5rem;
             overflow: hidden;
-        }
-
-        .project-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
-            opacity: 0.7;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px var(--card-hover-shadow);
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
         }
 
-        .project-card::after {
-            content: "";
+        .project-image {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-image::after {
+            content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            bottom: 0;
             left: 0;
-            z-index: -1;
-            opacity: 0.05;
-            background-image: radial-gradient(var(--primary-color) 2px, transparent 2px);
-            background-size: 30px 30px;
-            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--card-color);
         }
 
         .project-title {
             font-size: 1.4rem;
-            margin-bottom: 12px;
-            color: var(--header-color);
-            font-weight: 700;
-            border-left: 4px solid var(--primary-color);
-            padding-left: 10px;
-            transition: all 0.3s ease;
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .project-subtitle {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--subtitle-color);
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tag {
+            background: var(--tag-bg);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .project-tag:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
         }
 
         .project-description {
-            margin-bottom: 20px;
-            color: var(--tab-text);
             font-size: 0.95rem;
-            height: 80px;
-            overflow: hidden;
-            transition: all 0.3s ease;
+            line-height: 1.7;
+            color: var(--subtitle-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-description ul {
+            margin-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .project-description li {
+            margin-bottom: 0.3rem;
         }
 
         .project-links {
             display: flex;
-            gap: 12px;
+            gap: 1rem;
+            margin-top: auto;
         }
 
-        .project-links a {
-            display: inline-block;
-            padding: 10px 16px;
-            background-color: var(--primary-color);
-            color: var(--card-bg);
+        .project-link {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
             text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
-            transition: all 0.3s;
-            text-align: center;
+            color: white;
+            transition: var(--transition);
             flex: 1;
+            text-align: center;
         }
 
-        .project-links a:hover {
-            background-color: var(--primary-hover);
+        .github-link {
+            background: #24292e;
+        }
+
+        .demo-link {
+            background: var(--primary-color);
+        }
+
+        .project-link:hover {
             transform: translateY(-2px);
+            opacity: 0.95;
         }
 
-        .project-links a:last-child {
-            background-color: transparent;
+        /* Scroll Buttons */
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            border: none;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--primary-color);
-            border: 1px solid var(--primary-color);
+            z-index: 3;
+            transition: var(--transition);
         }
 
-        .project-links a:last-child:hover {
-            background-color: rgba(235, 248, 255, 0.1);
+        .scroll-button:hover {
+            background-color: var(--primary-color);
+            color: white;
         }
 
-        /* Responsive Design */
+        .scroll-left {
+            left: 1rem;
+        }
+
+        .scroll-right {
+            right: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #4f46e5 0%, #818cf8 100%);
+            color: white;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .footer-nav {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-nav a:hover {
+            opacity: 0.8;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
-            body {
-                padding: 20px 15px;
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
-            h1 {
+            header h1 {
                 font-size: 2.2rem;
             }
 
-            .tabs {
+            header p {
+                font-size: 1.1rem;
+            }
+
+            .header-buttons {
                 flex-direction: column;
+                align-items: center;
+            }
+
+            .header-button {
                 width: 100%;
+                max-width: 300px;
+                text-align: center;
             }
 
-            .tab-button {
-                width: 100%;
-                text-align: left;
-                border-left: 3px solid transparent;
-                border-bottom: none;
-                padding: 12px 15px;
+            .projects-heading h2 {
+                font-size: 1.8rem;
             }
 
-            .tab-button.active {
-                border-left: 3px solid var(--primary-color);
-                border-bottom: none;
+            .project-image {
+                height: 200px;
             }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .project-title {
+                font-size: 1.3rem;
             }
 
-            .project-description {
-                height: auto;
+            .project-subtitle {
+                font-size: 1rem;
             }
 
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
+            .project-card {
+                flex: 0 0 300px;
             }
+
+            .scroll-button {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .projects-container {
+                padding: 0 1rem;
+            }
+
+            header {
+                padding: 2rem 1rem;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .projects-heading h2 {
+                font-size: 1.5rem;
+            }
+
+            .project-tags {
+                gap: 0.4rem;
+            }
+
+            .project-tag {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.8rem;
+            }
+
+            .footer-nav {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+        }
+
+        /* Add this new style section */
+        .more-projects-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            /* Reduced height */
+            max-width: 100%;
+            /* Full width */
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #faf5ff 0%, #f3f4f6 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .more-projects-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg,
+                    rgba(79, 70, 229, 0.05) 0%,
+                    transparent 40%,
+                    transparent 60%,
+                    rgba(79, 70, 229, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .more-projects-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            transform: rotate(-15deg);
+            transition: var(--transition);
+        }
+
+        .more-projects-card:hover i {
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        .more-projects-card h3 {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .more-projects-card p {
+            color: var(--subtitle-color);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+
+        .more-projects-card .project-link {
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            background: var(--primary-color);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            width: auto;
+            min-width: 200px;
+        }
+
+        .more-projects-card .project-link span {
+            flex: 1;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <!-- Dark Mode Toggle Button -->
-    <div class="theme-toggle" onclick="toggleTheme()">
-        <!-- Sun icon for light mode -->
-        <svg class="light-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-15a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V5a1 1 0 0 1 1-1zm0 15a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0v-1a1 1 0 0 1 1-1zM5 12a1 1 0 0 1-1-1 1 1 0 0 1 1-1h1a1 1 0 0 1 0 2H5zm15 0a1 1 0 0 1-1-1 1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1zM6.364 6.364a1 1 0 0 1 0-1.414 1 1 0 0 1 1.414 0l.707.707a1 1 0 0 1-1.414 1.414l-.707-.707zm10.151 10.151a1 1 0 0 1 0-1.414 1 1 0 0 1 1.414 0l.707.707a1 1 0 0 1-1.414 1.414l-.707-.707zm-10.151.707a1 1 0 0 1-1.414-1.414l.707-.707a1 1 0 0 1 1.414 1.414l-.707.707zm10.151-10.151a1 1 0 0 1-1.414-1.414l.707-.707a1 1 0 0 1 1.414 1.414l-.707.707z" />
-        </svg>
-        <!-- Moon icon for dark mode -->
-        <svg class="dark-icon" style="display:none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 22c5.523 0 10-4.477 10-10 0-.463-.694-.54-.933-.163a6.5 6.5 0 1 1-8.904-8.904C12.54 2.693 12.463 2 12 2 6.477 2 2 6.477 2 12s4.477 10 10 10z" />
-        </svg>
-    </div>
-
-    <div class="header-container">
-        <h1>Projects</h1>
-    </div>
-
-    <div class="tabs-container">
-        <div class="tabs">
-            <button class="tab-button active" onclick="openTab(event, 'applied-os')">Applied OS Projects</button>
-            <button class="tab-button" onclick="openTab(event, 'ml')">ML Projects</button>
-            <button class="tab-button" onclick="openTab(event, 'dl')">DL Projects</button>
-            <button class="tab-button" onclick="openTab(event, 'gan')">GAN Projects</button>
-            <button class="tab-button" onclick="openTab(event, 'nlp')">NLP Projects</button>
-        </div>
-    </div>
-
-    <div id="applied-os" class="tab-content active">
-        <div class="projects-grid">
-            <div class="project-card">
-                <h2 class="project-title">🔧 Applied OS Projects Coming Soon! 🚀</h2>
-                <p class="project-description">
-                    I'm currently working on some exciting Operating System projects! They'll be displayed here soon. Stay tuned for the updates! 😊
-                </p>
+    <header>
+        <div class="header-content">
+            <h1>My Projects</h1>
+            <p>Exploring the Frontiers of Machine Learning and Artificial Intelligence</p>
+            <div class="header-buttons">
+                <a href="mailto:baijayantis56@gmail.com" class="header-button primary-button">Get in Touch</a>
+                <a href="https://github.com/abinashpradhan01" class="header-button secondary-button">View GitHub</a>
             </div>
         </div>
-    </div>
+    </header>
 
-    <div id="ml" class="tab-content">
+    <main class="projects-container">
+        <div class="projects-heading">
+            <h2>Featured Projects</h2>
+            <p class="projects-intro">Innovative Solutions in Machine Learning, Deep Learning, and AI</p>
+        </div>
+
         <div class="projects-grid">
-            <div class="project-card">
-                <h2 class="project-title">CO₂ Emission Prediction for Vehicles</h2>
-                <p class="project-description">Predict CO₂ emissions based on fuel consumption and engine size using
-                    Linear Regression techniques.</p>
-                <div class="project-links">
-                    <a href="https://abinashsfirstproject.streamlit.app/" target="_blank">Live Demo</a>
-                    <a href="https://github.com/abinashpradhan01/ML_Projects" target="_blank">Repository</a>
+            <!-- Project 1 -->
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="hybrid.webp" alt="Hybrid Recommendation System">
                 </div>
-            </div>
-        </div>
-    </div>
+                <div class="project-info">
+                    <h3 class="project-title">Hybrid Recommendation System</h3>
+                    <p class="project-subtitle">Advanced Movie & Product Recommendations</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Matrix Factorization</span>
+                        <span class="project-tag">Deep Learning</span>
+                        <span class="project-tag">TF-IDF</span>
+                    </div>
+                    <div class="project-description">
+                        <p>A sophisticated recommendation engine combining multiple approaches:</p>
+                        <ul>
+                            <li>Collaborative & Content-Based Filtering</li>
+                            <li>Neural Collaborative Filtering</li>
+                            <li>Matrix Factorization Implementation</li>
+                            <li>Flask/Streamlit Deployment</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/abinashpradhan01" class="project-link github-link"><i
+                                class="fab fa-github"></i> View Code</a>
+                        <a href="#" class="project-link demo-link"><i class="fas fa-external-link-alt"></i> Live
+                            Demo</a>
+                    </div>
+                </div>
+            </article>
 
-    <div id="dl" class="tab-content">
-        <div class="projects-grid">
-            <div class="project-card">
-                <h2 class="project-title">🚀 Projects Under Construction! 🏗️</h2>
-                <p class="project-description">
-                    I'm currently building some amazing deep learning projects! They'll be displayed here soon. Stay tuned for the updates! 😊
-                </p>
-            </div>
-        </div>        
-    </div>
+            <!-- Project 2 -->
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="fraud.webp" alt="Fraud Detection System">
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Fraud Detection System</h3>
+                    <p class="project-subtitle">Anomaly Detection in Financial Transactions</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Isolation Forest</span>
+                        <span class="project-tag">Autoencoders</span>
+                        <span class="project-tag">SMOTE</span>
+                    </div>
+                    <div class="project-description">
+                        <p>Advanced fraud detection combining multiple techniques:</p>
+                        <ul>
+                            <li>Anomaly Detection with Isolation Forest</li>
+                            <li>Deep Learning Autoencoders</li>
+                            <li>Ensemble of ML Models</li>
+                            <li>SHAP Value Explanations</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/abinashpradhan01" class="project-link github-link"><i
+                                class="fab fa-github"></i> View Code</a>
+                        <a href="#" class="project-link demo-link"><i class="fas fa-external-link-alt"></i> Live
+                            Demo</a>
+                    </div>
+                </div>
+            </article>
 
-    <div id="gan" class="tab-content">
-        <div class="projects-grid">
-            <div class="project-card">
-                <h2 class="project-title">🎨 GAN Projects Coming Soon! 🏗️</h2>
-                <p class="project-description">
-                    Exciting Generative Adversarial Network (GAN) projects are in the works! Stay tuned for AI-generated art, faces, and more. 🚀
-                </p>
-            </div>
-        </div>
-    </div>
+            <!-- Project 3 -->
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="object.webp" alt="Autonomous Driving Perception">
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Autonomous Driving Perception</h3>
+                    <p class="project-subtitle">Computer Vision & Object Detection</p>
+                    <div class="project-tags">
+                        <span class="project-tag">YOLOv5</span>
+                        <span class="project-tag">DBSCAN</span>
+                        <span class="project-tag">Kalman Filter</span>
+                    </div>
+                    <div class="project-description">
+                        <p>Comprehensive perception system featuring:</p>
+                        <ul>
+                            <li>Real-time Object Detection</li>
+                            <li>Lane Detection & Clustering</li>
+                            <li>Object Tracking Pipeline</li>
+                            <li>Multi-Model Integration</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/abinashpradhan01" class="project-link github-link"><i
+                                class="fab fa-github"></i> View Code</a>
+                        <a href="#" class="project-link demo-link"><i class="fas fa-external-link-alt"></i> Live
+                            Demo</a>
+                    </div>
+                </div>
+            </article>
 
-    <div id="nlp" class="tab-content">
-        <div class="projects-grid">
-            <div class="project-card">
-                <h2 class="project-title">📝 NLP Projects Coming Soon! 🚀</h2>
-                <p class="project-description">
-                    The world of Natural Language Processing is fascinating, and I'm currently working on some exciting
-                    projects! Stay tuned😊
-                </p>
-            </div>
+            <!-- Project 4 -->
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="stock.webp" alt="Stock Market Prediction">
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Stock Market Prediction</h3>
+                    <p class="project-subtitle">Time Series & Sentiment Analysis</p>
+                    <div class="project-tags">
+                        <span class="project-tag">LSTM/GRU</span>
+                        <span class="project-tag">BERT</span>
+                        <span class="project-tag">Prophet</span>
+                    </div>
+                    <div class="project-description">
+                        <p>Hybrid prediction model combining:</p>
+                        <ul>
+                            <li>Time Series Forecasting</li>
+                            <li>Sentiment Analysis</li>
+                            <li>Deep Learning Sequences</li>
+                            <li>Ensemble Predictions</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/abinashpradhan01" class="project-link github-link"><i
+                                class="fab fa-github"></i> View Code</a>
+                        <a href="#" class="project-link demo-link"><i class="fas fa-external-link-alt"></i> Live
+                            Demo</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- More Projects Card -->
+            <article class="project-card more-projects-card">
+                <i class="fas fa-rocket"></i>
+                <h3>Explore More</h3>
+                <p>Dive into my broader portfolio that includes more ML projects and projects in other domains too</p>
+                <a href="https://github.com/abinashpradhan01/projects-showcase" class="project-link demo-link">
+                    <span>View All Projects</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h2 class="footer-title">Let's Connect</h2>
+            <div class="social-links">
+                <a href="https://github.com/abinashpradhan01" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:baijayantis56@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 Abinash Pradhan. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
-        function openTab(evt, tabName) {
-            var i, tabContent, tabButtons;
-
-            // Hide all tab content
-            tabContent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabContent.length; i++) {
-                tabContent[i].classList.remove("active");
-            }
-
-            // Remove "active" class from all tab buttons
-            tabButtons = document.getElementsByClassName("tab-button");
-            for (i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].classList.remove("active");
-            }
-
-            // Show the current tab and add "active" class to the button
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
+        function scrollProjects(direction) {
+            const container = document.querySelector('.projects-grid');
+            const cardWidth = document.querySelector('.project-card').offsetWidth;
+            const scrollAmount = (cardWidth + 32) * direction; // 32px is the gap
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
-
-        // Dark mode toggle function
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            html.setAttribute('data-theme', newTheme);
-            
-            // Toggle icon visibility
-            const lightIcon = document.querySelector('.light-icon');
-            const darkIcon = document.querySelector('.dark-icon');
-            
-            if (newTheme === 'dark') {
-                lightIcon.style.display = 'none';
-                darkIcon.style.display = 'block';
-            } else {
-                lightIcon.style.display = 'block';
-                darkIcon.style.display = 'none';
-            }
-            
-            // Store preference in localStorage
-            localStorage.setItem('theme', newTheme);
-        }
-
-        // Check for saved theme preference
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            
-            if (savedTheme) {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-                
-                // Set correct icon
-                const lightIcon = document.querySelector('.light-icon');
-                const darkIcon = document.querySelector('.dark-icon');
-                
-                if (savedTheme === 'dark') {
-                    lightIcon.style.display = 'none';
-                    darkIcon.style.display = 'block';
-                }
-            }
-        });
     </script>
 </body>
 
