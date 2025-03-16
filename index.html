@@ -4,16 +4,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Abinash Pradhan | Projects">
     <meta name="description"
         content="Portfolio projects showcasing AI, machine learning, and data science work by Abinash Pradhan">
-    <meta name="keywords" content="AI, machine learning, projects, portfolio, data science, NLP">
+    <meta name="keywords"
+        content="AI, machine learning, projects, portfolio, data science, NLP, Abinash Pradhan, Iris Classification, House Price Prediction, Customer Churn">
     <meta name="author" content="Abinash Pradhan">
-    <meta property="og:title" content="Abinash Pradhan | Projects">
-    <meta property="og:description" content="Portfolio of machine learning and AI projects">
+    <meta name="application-name" content="Abinash Pradhan Projects">
+
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://abinashpradhan01.github.io/projects">
-    <meta property="og:image" content="path-to-your-preview-image.jpg">
+    <meta property="og:title" content="Abinash Pradhan | Projects">
+    <meta property="og:description" content="Portfolio of machine learning and AI projects">
+    <meta property="og:image" content="https://abinashpradhan01.github.io/Iris.png">
+    <meta property="og:site_name" content="Abinash Pradhan Projects">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://abinashpradhan01.github.io/projects">
+    <meta property="twitter:title" content="Abinash Pradhan | Projects">
+    <meta property="twitter:description" content="Portfolio of machine learning and AI projects">
+    <meta property="twitter:creator" content="@abinashpradhan01">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="generator" content="HTML5">
     <meta name="theme-color" content="#4f46e5">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Abinash Pradhan Projects">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://abinashpradhan01.github.io/projects">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://abinashpradhan01.github.io/assets/favicon.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "headline": "Abinash Pradhan's Machine Learning and AI Projects",
+      "description": "Portfolio projects showcasing AI, machine learning, and data science work by Abinash Pradhan",
+      "author": {
+        "@type": "Person",
+        "name": "Abinash Pradhan",
+        "url": "https://abinashpradhan01.github.io/"
+      },
+      "mainEntity": [
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "Iris Flower Classification",
+          "description": "A machine learning solution for classifying Iris flowers using KNN for classification, Decision Tree for feature importance, real-time predictions via Streamlit, and model evaluation and visualization.",
+          "codeRepository": "https://github.com/abinashpradhan01/IRIS_FLOWER_CLASSIFICATION",
+          "programmingLanguage": "Python",
+          "keywords": "Machine Learning, KNN, Decision Tree, Streamlit"
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "House Price Prediction",
+          "description": "A robust machine learning application to predict house prices using custom and Scikit-learn linear regression models, interactive Streamlit web application, and automatic data preprocessing.",
+          "codeRepository": "https://github.com/abinashpradhan01/ML_Projects/tree/main/Predict_House_Price",
+          "programmingLanguage": "Python",
+          "keywords": "Machine Learning, Linear Regression, Streamlit, Data Visualization"
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "Customer Churn Prediction",
+          "description": "A machine learning application that predicts customer churn using custom-implemented and Scikit-learn logistic regression models, comparative analysis of model accuracy, and interactive Streamlit web interface.",
+          "codeRepository": "https://github.com/abinashpradhan01/ML_Projects/tree/main/Customer_churn_prediction",
+          "programmingLanguage": "Python",
+          "keywords": "Machine Learning, Logistic Regression, Streamlit"
+        }
+      ]
+    }
+    </script>
+
     <title>Abinash Pradhan | Projects</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +94,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- ScrollReveal Library -->
+    <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+
     <style>
         :root {
             --primary: #4f46e5;
@@ -282,6 +359,13 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
+            transition: transform 0.5s ease;
+            border-top-left-radius: var(--card-border-radius);
+            border-top-right-radius: var(--card-border-radius);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
         }
 
         .project-content {
@@ -293,6 +377,11 @@
             margin-bottom: 0.75rem;
             color: var(--dark);
             font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .project-card:hover .project-title {
+            color: var(--primary);
         }
 
         .project-description {
@@ -316,12 +405,14 @@
             border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 500;
-            transition: var(--transition);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .project-tag:hover {
             background: var(--primary);
             color: white;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.2);
         }
 
         .project-links {
@@ -336,16 +427,38 @@
             color: var(--primary);
             font-weight: 600;
             font-size: 0.9rem;
-            transition: var(--transition);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            padding: 0.3rem 0;
         }
 
         .project-link i {
             margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .project-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
         }
 
         .project-link:hover {
             color: var(--dark);
             transform: translateX(3px);
+        }
+
+        .project-link:hover::after {
+            width: 100%;
+        }
+
+        .project-link:hover i {
+            transform: translateX(-3px);
         }
 
         .section-title {
@@ -776,6 +889,28 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             if (textArray.length) setTimeout(type, newTextDelay + 250);
+
+            // Initialize ScrollReveal
+            const sr = ScrollReveal({
+                origin: 'bottom',
+                distance: '30px',
+                duration: 800,
+                delay: 300,
+                easing: 'cubic-bezier(0.5, 0, 0, 1)',
+                reset: false
+            });
+
+            // Apply to project cards
+            sr.reveal('.project-card', {
+                interval: 200,
+                scale: 0.95
+            });
+
+            // Apply to section titles and descriptions
+            sr.reveal('.section-title, .section-description', {
+                origin: 'top',
+                distance: '20px'
+            });
         });
     </script>
 </body>
