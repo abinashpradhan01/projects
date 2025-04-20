@@ -418,48 +418,45 @@
 
         .project-links {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
 
         .project-link {
             display: inline-flex;
             align-items: center;
-            text-decoration: none;
+            gap: 0.5rem;
             color: var(--primary);
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            padding: 0.3rem 0;
-        }
-
-        .project-link i {
-            margin-right: 0.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .project-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background-color: var(--tag-bg);
+            transition: all 0.3s ease;
         }
 
         .project-link:hover {
-            color: var(--dark);
-            transform: translateX(3px);
+            color: var(--light);
+            background-color: var(--primary);
+            transform: translateY(-2px);
         }
 
-        .project-link:hover::after {
-            width: 100%;
+        .dark-mode .project-link {
+            background-color: var(--background-color);
+            color: var(--primary);
+        }
+
+        .dark-mode .project-link:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        .project-link i {
+            transition: transform 0.3s ease;
         }
 
         .project-link:hover i {
-            transform: translateX(-3px);
+            transform: translateX(3px);
         }
 
         .section-title {
@@ -494,110 +491,69 @@
 
         /* Footer */
         footer {
-            padding: 3rem 0 2rem;
+            padding: 1.5rem;
             text-align: center;
-            color: var(--secondary);
-            background: var(--card-background);
+            background-color: var(--card-background);
             border-top: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 1rem;
-        }
-
-        .footer-text {
-            font-size: 0.95rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            line-height: 1.7;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .footer-social {
+            margin: 0.75rem 0;
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            gap: 1.25rem;
         }
 
-        .footer-social-link {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: var(--tag-bg);
+        .social-link {
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: var(--background-color);
             color: var(--primary);
-            font-size: 1.2rem;
-            transition: var(--transition);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .footer-social-link:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .footer-nav {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 1.5rem 0;
-        }
-
-        .footer-nav a {
-            color: var(--dark);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .footer-nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
+        .social-link:hover {
+            color: var(--light);
             background-color: var(--primary);
-            transition: width 0.3s;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .footer-nav a:hover::after {
-            width: 100%;
+        .footer-text {
+            color: var(--text-color);
+            font-size: 0.85rem;
+            margin: 0;
+            font-weight: 500;
         }
 
-        .footer-nav a:hover {
+        .footer-proverb {
+            font-style: italic;
             color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
-        .footer-bottom {
-            border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
+        /* Dark mode overrides */
+        .dark-mode footer {
+            background-color: var(--card-background);
+            border-color: var(--border-color);
+        }
+
+        .dark-mode .social-link {
+            background-color: var(--background-color);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-mode .social-link:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         /* Responsive */
@@ -667,11 +623,6 @@
 
             .projects-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .footer-nav {
-                flex-wrap: wrap;
-                gap: 1rem;
             }
         }
     </style>
@@ -823,32 +774,20 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <p class="footer-text">
-                Always learning, always growing.
-            </p>
-            <div class="footer-social">
-                <a href="https://github.com/abinashpradhan01" target="_blank" class="footer-social-link"
-                    aria-label="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://in.linkedin.com/in/abinash-pradhan-a42157297" target="_blank"
-                    class="footer-social-link" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="mailto:baijayantis56@gmail.com" class="footer-social-link" aria-label="Email">
-                    <i class="far fa-envelope"></i>
-                </a>
-            </div>
-            <div class="footer-nav">
-                <a href="https://abinashpradhan01.github.io">Home</a>
-                <a href="https://abinashpradhan01.github.io/about/">About</a>
-                <a href="https://abinashpradhan01.github.io/blogs/">Blog</a>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Abinash Pradhan. All rights reserved.</p>
-            </div>
+        <p class="footer-proverb">always learning, always growing</p>
+        <div class="footer-social">
+            <a href="https://github.com/abinashpradhan01" class="social-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/abinash-pradhan-01" class="social-link" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:abinash01pradhan@gmail.com" class="social-link" target="_blank" rel="noopener noreferrer">
+                <i class="far fa-envelope"></i>
+            </a>
         </div>
+        <p class="footer-text">&copy; 2025 Abinash Pradhan. All rights reserved.</p>
     </footer>
 
     <!-- Back to Top Button -->
